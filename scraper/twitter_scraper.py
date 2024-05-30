@@ -464,7 +464,9 @@ It may be due to the following:
                                     if not tweet.is_ad:
                                         self.data.append(tweet.tweet)
                                         added_tweets += 1
-                                        self.progress.print_progress(len(self.data), False, 0, no_tweets_limit)
+                                        # since I'm using Jupyter Notebooks, I don't want this to be printed every time.
+                                        if len(self.data) % 100 is int:
+                                            self.progress.print_progress(len(self.data), False, 0, no_tweets_limit)
 
                                         if len(self.data) >= self.max_tweets and not no_tweets_limit:
                                             self.scroller.scrolling = False
@@ -481,6 +483,9 @@ It may be due to the following:
                         continue
 
                 if len(self.data) >= self.max_tweets and not no_tweets_limit:
+                    # since I'm using Jupyter Notebooks, I don't want this to be printed every time.
+                    if len(self.data) % 100 is not int:
+                        self.progress.print_progress(len(self.data), False, 0, no_tweets_limit)
                     break
 
                 if added_tweets == 0:
