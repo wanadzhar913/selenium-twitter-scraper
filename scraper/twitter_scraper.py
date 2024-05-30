@@ -570,7 +570,12 @@ It may be due to the following:
         df = pd.DataFrame(data)
 
         current_time = now.strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = f"{folder_path}{current_time}_tweets_1-{len(self.data)}.csv"
+        if self.scraper_details["query"] is not None and self.scraper_details["query"] != "":
+            file_path = f"{folder_path}{current_time}_{self.scraper_details['query'].replace(' ', '_')}_tweets_1-{len(self.data)}.csv"
+            print(file_path)
+        else:
+            file_path = f"{folder_path}{current_time}_tweets_1-{len(self.data)}.csv"
+            print(file_path)
         pd.set_option("display.max_colwidth", None)
         df.to_csv(file_path, index=False, encoding="utf-8")
 
