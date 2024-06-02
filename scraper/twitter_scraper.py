@@ -465,7 +465,7 @@ It may be due to the following:
                                         self.data.append(tweet.tweet)
                                         added_tweets += 1
                                         # since I'm using Jupyter Notebooks, I don't want this to be printed every time.
-                                        if len(self.data) % 100 is int:
+                                        if len(self.data) % 100 == 0 | len(self.data) == 50:
                                             self.progress.print_progress(len(self.data), False, 0, no_tweets_limit)
 
                                         if len(self.data) >= self.max_tweets and not no_tweets_limit:
@@ -483,9 +483,6 @@ It may be due to the following:
                         continue
 
                 if len(self.data) >= self.max_tweets and not no_tweets_limit:
-                    # since I'm using Jupyter Notebooks, I don't want this to be printed every time.
-                    if len(self.data) % 100 is not int:
-                        self.progress.print_progress(len(self.data), False, 0, no_tweets_limit)
                     break
 
                 if added_tweets == 0:
